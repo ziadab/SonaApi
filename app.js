@@ -6,17 +6,22 @@ const util = require("util")
 const client = new Discord.Client()
 const app = express()
 
+app.use(express.json())
+
 app.post("/", async (req, res) => {
   const body = req.body
+  console.log(req.query)
+  console.log(req.params)
+  console.log(req.body)
 
-  const channel = client.channels.cache.get(process.env.CHANNEL_ID)
+  // const channel = client.channels.cache.get(process.env.CHANNEL_ID)
 
   const msg = `<@232909121639153665> <@490663251953188865> LOL ARABIA IS STREAMING U BITCHES QJKSJQKJQKj`.concat(
     "\n",
     "```json\n" + util.inspect(body, false, null) + "```"
   )
 
-  channel.send(msg)
+  client.channels.cache.get(process.env.CHANNEL_ID).send(msg)
 
   res.send("OK")
 })
