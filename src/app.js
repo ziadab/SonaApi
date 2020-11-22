@@ -10,8 +10,14 @@ const getDiscord = require("./utils/getDiscord")
 const client = new Discord.Client({ fetchAllMembers: true })
 const app = express()
 
+// routes
+const upcomingMatches = require("./routes/upcoming-matches")
+const ranking = require("./routes/ranking")
+
 // middlewares
 app.use(express.json())
+app.use("/upcoming-matches", upcomingMatches)
+app.use("/ranking", ranking)
 
 app.post("/", async (req, res) => {
   const body = req.body
